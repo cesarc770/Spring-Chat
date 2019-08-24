@@ -1,4 +1,4 @@
-package com.example.springchat;
+package com.cesarcaceres.springchat;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

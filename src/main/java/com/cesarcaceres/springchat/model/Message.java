@@ -1,4 +1,4 @@
-package com.example.springchat.model;
+package com.cesarcaceres.springchat.model;
 
 public class Message {
     private String content;
