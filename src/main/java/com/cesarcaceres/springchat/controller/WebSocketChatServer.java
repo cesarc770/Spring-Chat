@@ -1,6 +1,7 @@
 package com.cesarcaceres.springchat.controller;
 
 import com.cesarcaceres.springchat.model.Message;
+import com.google.gson.Gson;
 import org.springframework.stereotype.Component;
 
 import javax.websocket.*;
@@ -16,12 +17,12 @@ import java.util.concurrent.CopyOnWriteArraySet;
 @ServerEndpoint("/chat")
 public class WebSocketChatServer {
     private Session session;
-
+    public static Gson gson = new Gson();
     public static Set<WebSocketChatServer> listeners = new CopyOnWriteArraySet<>();
 
-    public static void sendMessageToAll(String msg) {
+    public static void sendMessageToAll(Message msg) {
         for (WebSocketChatServer listener : listeners) {
-            listener.sendMessage(msg);
+            listener.sendMessage(gson.toJson(msg));
         }
     }
 
@@ -41,8 +42,8 @@ public class WebSocketChatServer {
     }
 
     @OnMessage
-    public void onMessage(String message) {
-        //TODO: add send message.
+    public void onMessage(String JsonStr) {
+        Message message = gson.fromJson(JsonStr, Message.class);
         sendMessageToAll(message);
     }
 
