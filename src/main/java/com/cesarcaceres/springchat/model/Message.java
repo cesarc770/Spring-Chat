@@ -12,19 +12,24 @@ public class Message {
     @JSONField(name = "type")
     private String type;
 
-    @JSONField(name = "onlinecount")
+    @JSONField(name = "onlineCount")
     private String onlineCount;
 
 
-    public Message() {
-    }
+    public Message() {}
 
     public Message(String username, String message) {
-        super();
         this.username = username;
         this.message = message;
-        this.type = "SPEAK";
-        this.onlineCount = "";
+        this.type = "";
+        this.onlineCount = "0";
+    }
+
+    public Message(String username, String message, String type, String onlineCount) {
+        this.username = username;
+        this.message = message;
+        this.type = type;
+        this.onlineCount = onlineCount;
     }
 
     public String getUsername() {
@@ -56,7 +61,7 @@ public class Message {
     }
 
     public void setOnlineCount(String onlineCount) {
-        this.onlineCount = onlineCount;
+        this.onlineCount = Integer.toString(Integer.parseInt(this.getOnlineCount()) + 1);
     }
 }
 
