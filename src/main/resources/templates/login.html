@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Chat Room Login</title>
-    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <style>
         *, *:after, *:before {
             -webkit-box-sizing: border-box;
@@ -10,7 +10,7 @@
         }
 
         body {
-            background: #383a3c url('/img/login-bg.jpg');
+            background: #383a3c;
             font-weight: 400;
             font-size: 1em;
             line-height: 1.25;
@@ -148,7 +148,7 @@
 
     function login() {
         var username = document.getElementById("username").value;
-        window.location.href = "chat?username=" + username;
+        window.location.href = "home?username=" + username;
     }
 
 
