@@ -14,7 +14,7 @@ public class SpringChatController {
         return new ModelAndView("/login");
     }
 
-    @GetMapping("/chat")
+    @GetMapping("/home")
     public ModelAndView index(String username, HttpServletRequest request) throws UnknownHostException {
         ModelAndView view = new ModelAndView("/chat");
         view.addObject("username", username);

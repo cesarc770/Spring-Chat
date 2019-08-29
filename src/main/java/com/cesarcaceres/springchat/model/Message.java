@@ -1,20 +1,30 @@
 package com.cesarcaceres.springchat.model;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 public class Message {
+    @JSONField(name = "username")
     private String username;
+
+    @JSONField(name = "msg")
     private String message;
+
+    @JSONField(name = "type")
     private String type;
+
+    @JSONField(name = "onlinecount")
     private String onlineCount;
 
 
     public Message() {
     }
 
-    public Message(String username, String message, String type, String onlineCount) {
+    public Message(String username, String message) {
+        super();
         this.username = username;
         this.message = message;
-        this.type = type;
-        this.onlineCount = onlineCount;
+        this.type = "SPEAK";
+        this.onlineCount = "";
     }
 
     public String getUsername() {
