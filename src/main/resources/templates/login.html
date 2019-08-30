@@ -9,8 +9,15 @@
             box-sizing: border-box;
         }
 
+        html {
+        height: 100%;
+        }
+
         body {
-            background: #383a3c;
+            background: #383a3c url('https://coolbackgrounds.io/images/backgrounds/index/sea-edge-79ab30e2.png');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
             font-weight: 400;
             font-size: 1em;
             line-height: 1.25;
@@ -136,7 +143,7 @@
     <form>
         <div class="input_outer">
             <span class="u_user"></span>
-            <input id="username" name="username" class="text" type="text" placeholder="Username">
+            <input id="username" name="username" class="text" type="text" placeholder="Username" autocomplete="off">
         </div>
         <div class="mb2">
             <a class="act-but submit" onclick="login()">Login</a>
