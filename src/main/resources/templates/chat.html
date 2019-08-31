@@ -11,13 +11,26 @@
 </head>
 <style>
     body, html {
-    background: url('https://coolbackgrounds.io/images/backgrounds/index/ranger-4df6c1b6.png');
-    background-position: center;
-    background-size: cover;
-    height: 100%;
+        background: url('https://coolbackgrounds.io/images/backgrounds/index/ranger-4df6c1b6.png');
+        background-position: center;
+        background-size: cover;
+        height: 100%;
+        font: 'Helvetica';
+        color: #ffffff;
     }
+
+
+    .align-center {
+      display: flex;
+      vertical-align: baseline;
+    }
+
+    .message-container {
+        color: #000000;
+    }
+
 </style>
-<body class="">
+<body>
 
 <nav class="navbar navbar-dark bg-primary">
         <span class="navbar-brand">Chat Room</span>
@@ -40,10 +53,12 @@
                 </div>
                 <div class="col-sm-12 col-sm-10">
                     <div class="form-group row">
-                        <i class="icon material-icons btn-outline-info">textsms</i>
-                        <label class="col-sm-2 col-form-label">Send</label>
+                        <div class="align-center">
+                            <i class="icon material-icons btn-outline-info" style="padding:5px;">textsms</i>
+                            <label class="col-form-label icon-text">Send Text:</label>
+                        </div>
                         <div class="col-sm-10">
-                        <input class="form-control" id="msg"/>
+                            <input class="form-control" id="msg"/>
                         </div>
                     </div>
                     <div class="container" style="padding:20px 35px">
@@ -84,6 +99,7 @@
 
         webSocket.onopen = function (event) {
             console.log('WebSocket open connection');
+            webSocket.send(JSON.stringify({username: $('#username').text(), msg: $('#username').text()+ " has joined the chat!", type: "OPENED"}));
         };
 
         webSocket.onmessage = function (event) {
@@ -94,8 +110,20 @@
             if (message.type === 'SPEAK') {
                 $messageContainer.append(
                     '<div class="card bg-light mt-3">' +
-                    '<div class="card-body">' +
+                    '<div class="card-body align-center">' +
                     '<div class="row ml-3" ><h5 class="card-title col-xs-4">' + message.username + '：</h5> <p class="card-text col-xs-6">' + message.msg + '</p></div></div>' +
+                    '</div></div>');
+            } else if (message.type === 'OPENED') {
+                $messageContainer.append(
+                    '<div class="card bg-success mt-3 console-message">' +
+                    '<div class="card-body" style="color:white">' +
+                    '<div class="text-center"><p class="card-text">' + message.msg + '</p></div>' +
+                    '</div></div>');
+            } else if (message.type === 'CLOSED') {
+                $messageContainer.append(
+                    '<div class="card bg-dark  mt-3 console-message">' +
+                    '<div class="card-body" style="color:white">' +
+                    '<div class="text-center"><p class="card-text">' + message.msg + '</p></div>' +
                     '</div></div>');
             }
             $('.chat-num').text(message.onlineCount);
@@ -109,6 +137,7 @@
 
         webSocket.onclose = function (event) {
             console.log('WebSocket close connection.');
+            webSocket.send(JSON.stringify({username: $('#username').text(), msg: $('#username').text()+ " has left the chat!", type: "CLOSED"}));
         };
 
 
@@ -123,7 +152,7 @@
     function sendMsgToServer() {
         var $message = $('#msg');
         if ($message.val()) {
-            webSocket.send(JSON.stringify({username: $('#username').text(), msg: $message.val()}));
+            webSocket.send(JSON.stringify({username: $('#username').text(), msg: $message.val(), type: 'SPEAK'}));
             $message.val(null);
         }
     }

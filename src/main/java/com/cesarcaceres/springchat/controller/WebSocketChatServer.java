@@ -32,21 +32,18 @@ public class WebSocketChatServer {
     @OnOpen
     public void onOpen(Session session) throws IOException {
         onlineSessions.put(session.getId(), session);
-        Message msg = new Message("Chat App", "User logged in" , "OPENED_CONNECTION", Integer.toString(onlineSessions.size()));
-        sendMessageToAll(msg);
     }
 
     @OnMessage
     public void onMessage(String JsonStr) {
         Message message = JSON.parseObject(JsonStr, Message.class);
-        message.setType("SPEAK");
         sendMessageToAll(message);
     }
 
     @OnClose
     public void onClose(Session session) throws IOException {
         onlineSessions.remove(session.getId());
-        Message msg = new Message("Chat App", "Connection lost" , "CLOSED_CONNECTION", Integer.toString(onlineSessions.size()));
+        Message msg = new Message("Chat App", "User has left the chat!" , "CLOSED", Integer.toString(onlineSessions.size()));
         sendMessageToAll(msg);
     }
 
