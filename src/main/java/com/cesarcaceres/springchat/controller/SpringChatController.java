@@ -11,12 +11,12 @@ import java.net.UnknownHostException;
 public class SpringChatController {
     @GetMapping("/")
     public ModelAndView login() {
-        return new ModelAndView("/login");
+        return new ModelAndView("login");
     }
 
     @GetMapping("/home")
     public ModelAndView index(String username, HttpServletRequest request) throws UnknownHostException {
-        ModelAndView view = new ModelAndView("/chat");
+        ModelAndView view = new ModelAndView("chat");
         view.addObject("username", username);
         return view;
     }
