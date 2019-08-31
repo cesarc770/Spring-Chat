@@ -35,7 +35,7 @@
 <nav class="navbar navbar-dark bg-primary">
         <span class="navbar-brand">Chat Room</span>
         <div class="form-inline mr-sm-2">
-            <a class="btn btn-outline-light" th:href="@{/}">
+            <a class="btn btn-outline-light" id="logout-btn" th:href="@{/}">
                 <i class="material-icons">exit_to_app</i>
             </a>
         </div>
@@ -62,7 +62,7 @@
                         </div>
                     </div>
                     <div class="container" style="padding:20px 35px">
-                        <button class="btn btn-info"
+                        <button class="btn btn-info" id="send-btn"
                                 onclick="sendMsgToServer()">Send
                         </button>
                         <button class="btn btn-secondary"
@@ -111,7 +111,7 @@
                 $messageContainer.append(
                     '<div class="card bg-light mt-3">' +
                     '<div class="card-body align-center">' +
-                    '<div class="row ml-3" ><h5 class="card-title col-xs-4">' + message.username + '：</h5> <p class="card-text col-xs-6">' + message.msg + '</p></div></div>' +
+                    '<div class="row ml-3" ><h5 class="card-title col-xs-4">' + message.username + '：</h5> <p class="card-text col-xs-6 msg-text">' + message.msg + '</p></div></div>' +
                     '</div></div>');
             } else if (message.type === 'OPENED') {
                 $messageContainer.append(
