@@ -97,7 +97,7 @@
     function getWebSocket() {
         var getUrl = window.location;
         var baseUrl = getUrl.host;
-        var webSocket = new WebSocket('ws://'+ baseUrl +'/chat');
+        var webSocket = new WebSocket('wss://'+ baseUrl +'/chat');
 
         webSocket.onopen = function (event) {
             console.log('WebSocket open connection');
